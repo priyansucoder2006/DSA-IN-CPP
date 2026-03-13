@@ -1,0 +1,33 @@
+bool painterPartition (int maxTime,vector<int>&arr,int k){
+		int count=1;
+		int time=arr[0];
+		for(int i=1;i<arr.size();i++){
+			time+=arr[i];
+			if(time>maxTime){
+				count++;
+				time=arr[i];
+			}
+		}
+		return count<=k;
+}
+int minTime(vector<int> &arr, int k) {
+    // Your code here
+	int start=0;
+	int end=0;
+	int ans;
+	for(int i=0;i<arr.size();i++){
+    start=max(start,arr[i]);
+	end+=arr[i];
+	}
+	while(start<=end){
+	int mid=start+(end-start)/2;
+	if(painterPartition(mid,arr,k)){
+	 ans=mid;
+	 end=mid-1;
+	}
+	else{
+		start=mid+1;
+	}
+	}
+	return ans;
+}
