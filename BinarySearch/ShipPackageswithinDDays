@@ -1,0 +1,33 @@
+bool possible(int maxDay,vector<int>&arr,int keys){
+	int count=1;
+	int day=arr[0];
+	for(int i=1;i<arr.size();i++){
+		day+=arr[i];
+		if(day>maxDay){
+			count++;
+			day=arr[i];
+		}
+	}
+	return count<=keys;
+}
+int shipWithinDays(vector<int> &arr, int days) {
+    // Your code here
+	int start=0;
+	int end=0;
+	int ans;
+	for(int i=0;i<arr.size();i++){
+		start=max(start,arr[i]);
+		end+=arr[i];
+	}
+	while(start<=end){
+		int mid=start+(end-start)/2;
+		if(possible(mid,arr,days)){
+			ans=mid;
+			end=mid-1;
+		}
+		else{
+			start=mid+1;
+		}
+	}
+	return ans;
+}
