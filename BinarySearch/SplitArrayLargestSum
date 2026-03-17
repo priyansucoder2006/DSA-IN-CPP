@@ -1,0 +1,33 @@
+bool valid(int maxSum,vector<int> &arr, int k){
+	int count=1;
+	int sum=arr[0];
+	for(int i=1;i<arr.size();i++){
+		sum+=arr[i];
+		if(sum>maxSum){
+			count++;
+			sum=arr[i];
+		}
+	}
+	return count<=k;
+}
+int splitArray(vector<int> &arr, int k) {
+	int start=0;
+	int end=0;
+	for(int i=0;i<arr.size();i++){
+		start=max(start,arr[i]);
+		end+=arr[i];
+	}
+	int mid;
+	int ans;
+	while(start<=end){
+		int mid=start+(end-start)/2;
+		if(valid(mid,arr,k)){
+			ans=mid;
+			end=mid-1;
+		}
+		else{
+			start=mid+1;
+		}
+	}
+    return ans;
+}
