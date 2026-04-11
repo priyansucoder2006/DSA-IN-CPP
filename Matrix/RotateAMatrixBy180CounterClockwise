@@ -1,0 +1,24 @@
+void rotateMatrix(vector<vector<int>>& mat) {
+    int row=mat.size();
+    int column=mat[0].size();
+    int firstrowindex=0;
+    int firstcolumnindex=0;
+    int lastcolumnindex=row-1;
+    int lastrowindex=column-1;
+         while(firstrowindex<lastrowindex){
+        for(int j=0;j<column;j++){
+            swap(mat[firstrowindex][j],mat[lastrowindex][j]);
+        }
+            firstrowindex++;
+            lastrowindex--;
+        }
+        while(firstcolumnindex<lastcolumnindex){
+            for(int j=0;j<row;j++){
+         swap(mat[j][firstcolumnindex],mat[j][lastcolumnindex]);
+            }
+            firstcolumnindex++;
+            lastcolumnindex--;
+        }
+}
+       
+    
