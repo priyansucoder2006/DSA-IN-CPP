@@ -1,0 +1,25 @@
+bool searchMatrix(vector<vector<int>>& matrix, int target) {
+    if (matrix.empty() || matrix[0].empty()) return false;
+
+    int m = matrix.size();    // rows
+    int n = matrix[0].size(); // cols
+
+    int start = 0;
+    int end = m * n - 1;
+
+    while (start <= end) {
+        int mid = start + (end - start) / 2;
+
+        // 🔥 treat as column-major
+        int row = mid % m;
+        int col = mid / m;
+
+        int value = matrix[row][col];
+
+        if (value == target) return true;
+        else if (value < target) start = mid + 1;
+        else end = mid - 1;
+    }
+
+    return false;
+}
