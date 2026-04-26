@@ -1,0 +1,17 @@
+string sort(string s) {
+    // Code here
+    string ans="";
+    vector<int>alphabet(26,0);
+    for(int i=0;i<s.size();i++){
+        alphabet[s[i]-'a']++;
+    }
+    for(int i=0;i<26;i++){
+        char c='a'+i;
+while(alphabet[i]){
+    ans.push_back(c);
+    alphabet[i]--;
+}
+}
+    
+    return ans;
+}
