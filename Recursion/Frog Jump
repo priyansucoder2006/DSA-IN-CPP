@@ -1,0 +1,13 @@
+nt countHops(int n) {
+    // Your code here  
+    if(n<=2){
+    return n;
+    }
+    if(n==3){
+    return 4;
+        }
+    int ans=countHops(n-3)+countHops(n-2)+countHops(n-1);
+    return ans;
+
+     
+}
