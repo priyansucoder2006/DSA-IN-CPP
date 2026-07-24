@@ -1,0 +1,65 @@
+int KMP_MATCH( const string &haystack,const string &needle) {
+
+    int n = needle.size(), m = haystack.size();
+
+    vector<int> LPS(n,0);
+    int prefix = 0, suffix = 1;
+
+    while(suffix < n){
+        if(needle[prefix] == needle[suffix]){
+            LPS[suffix] = prefix + 1;
+            prefix++, suffix++;
+        }
+        else{
+            if(prefix == 0){
+                suffix++;
+            }
+            else{
+                prefix = LPS[prefix-1];
+            }
+        }
+    }
+
+    prefix = 0, suffix = 0;
+
+    while(prefix < n && suffix < m){
+        if(haystack[suffix] == needle[prefix]){
+            suffix++, prefix++;
+        }
+        else{
+            if(prefix == 0){
+                suffix++;
+            }
+            else{
+                prefix = LPS[prefix-1];
+            }
+        }
+    }
+
+    if(prefix == n){
+        return 1;
+    }
+    else{
+        return -1;
+    }
+}
+
+int repeatedStringMatch(string &a, string &b) {
+    int match = 1;
+    string temp = a;
+
+    while(temp.size() < b.size()){
+        temp += a;
+        match++;
+    }
+
+    if(KMP_MATCH(temp,b) == 1){
+        return match;
+    }
+
+    if(KMP_MATCH(temp + a,b) == 1){
+        return match + 1;
+    }
+
+    return -1;
+}
