@@ -1,0 +1,17 @@
+int maxUniqueSubstring(string& s) {
+       //code here
+       vector<bool>ocurrance(256,0);
+       int start=0;
+       int end=0,ans=0;
+    while(end<s.size()){
+        while(ocurrance[s[end]]){
+            ocurrance[s[start]]=0;
+            start++;
+        }
+    ocurrance[s[end]]=1;
+    end++;
+ans=max(ans,end-start);
+    }
+return ans;
+
+}
