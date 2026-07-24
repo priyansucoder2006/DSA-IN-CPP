@@ -1,0 +1,31 @@
+int minAppendToPalindrome(string &s) {
+    int size = s.size();
+
+    string rev = s;
+    reverse(rev.begin(), rev.end());
+
+    string temp = rev;
+    temp += '#';
+    temp += s;
+
+    int n = temp.size();
+    vector<int> LPS(n, 0);
+
+    int prefix = 0;
+    int suffix = 1;
+
+    while (suffix < n) {
+        if (temp[prefix] == temp[suffix]) {
+            LPS[suffix] = prefix + 1;
+            suffix++;
+            prefix++;
+        } else {
+            if (prefix == 0)
+                suffix++;
+            else
+                prefix = LPS[prefix - 1];
+        }
+    }
+
+    return size - LPS[n - 1];
+}
