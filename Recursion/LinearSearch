@@ -1,0 +1,15 @@
+int search(vector<int>& arr, int target,int index){
+   if(index==arr.size()){
+        return -1;
+    }
+    if(target==arr[index]){
+        return index;
+    }
+  return  search(arr,target,index+1);
+}
+
+int linearSearch(vector<int>& arr, int target) {
+    //code here
+   return  search(arr,target,0);
+
+}
