@@ -1,0 +1,24 @@
+class Solution {
+public:
+int binarysearch(vector<int>arr,int start,int end,int target){
+    if(start>end){
+        return -1;
+    }
+    int mid=start+(end-start)/2;
+    if(arr[mid]==target){
+        return mid;
+    }
+    else if(arr[mid]>target){
+      return  binarysearch(arr,start,mid-1,target);
+    }
+    else{
+        return binarysearch(arr,mid+1,end,target);
+    }
+}
+    int search(vector<int>& nums, int target) {
+        // Write your code here
+        int start=0;
+        int end=nums.size()-1;
+        return binarysearch(nums,start,end,target);
+    }
+};
