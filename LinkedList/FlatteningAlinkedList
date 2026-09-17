@@ -1,0 +1,49 @@
+* struct Node {
+    int data;
+    struct Node * next;
+    struct Node * bottom;
+    Node(int x) {
+        data = x;
+        next = NULL;
+        bottom = NULL;
+    }
+}; */
+Node* sortedMerge(Node* a, Node* b) {
+    if (!a) return b;
+    if (!b) return a;
+    Node* dummy = new Node(0);
+    Node* tail = dummy;
+    while (a && b) {
+        if (a->data <= b->data) {
+            tail->bottom = a;
+            a = a->bottom;
+        } else {
+            tail->bottom = b;
+            b = b->bottom;
+        }
+        tail = tail->bottom;
+    }
+    tail->bottom = a ? a : b;
+    Node* res = dummy->bottom;
+    delete dummy;
+    return res;
+}
+
+Node* merge(vector<Node*>& arr, int start, int end) {
+    if (start == end) return arr[start];
+    int mid = start + (end - start) / 2;
+    Node* left  = merge(arr, start, mid);
+    Node* right = merge(arr, mid + 1, end);
+    return sortedMerge(left, right);
+}
+
+Node* flatten(Node* root) {
+    if (!root) return nullptr;
+    vector<Node*> arr;
+    Node* curr = root;
+    while (curr) {
+        arr.push_back(curr);
+        curr = curr->next;
+    }
+    return merge(arr, 0, (int)arr.size() - 1);
+}
