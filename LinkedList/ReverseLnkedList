@@ -1,0 +1,13 @@
+ListNode* reverseList(ListNode* head) {
+    ListNode* prev=NULL;
+    ListNode* curr=head;
+    while(curr){
+        ListNode* Future=curr->next;
+        curr->next=prev;
+        prev=curr;
+        curr=Future;
+    }
+    head=prev;
+    return head;
+    
+}
