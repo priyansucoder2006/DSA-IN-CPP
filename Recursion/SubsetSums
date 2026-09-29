@@ -1,0 +1,17 @@
+class Solution {
+public:
+void Subsets(vector<int>&arr,int index,int sum,int n,vector<int>&ans){
+    if(index==n){
+        ans.push_back(sum);
+        return;
+    }
+    Subsets(arr,index+1,sum+arr[index],n,ans);
+    Subsets(arr,index+1,sum,n,ans);
+}
+    vector<int> subsetSums(vector<int>& arr) {
+        // Your code here
+        vector<int>ans;
+        Subsets(arr,0,0,arr.size(),ans);
+        return ans;
+    }
+};
