@@ -1,0 +1,23 @@
+lass Solution {
+public:
+void perfectSum(vector<int>&arr,int target,int index,int &count,int sum,int n){
+if(target==sum){
+    count++;
+    return ;
+}
+if(sum>target||index==n){
+    return;
+
+}
+
+    perfectSum(arr,target,index+1,count,sum+arr[index],n);
+    perfectSum(arr,target,index+1,count,sum,n);
+
+}
+    int countSubsetsWithSum(vector<int>& arr, int target) {
+        // Your code here
+        int count=0;
+        perfectSum(arr,target,0,count,0,arr.size());
+        return count;
+    }
+};
