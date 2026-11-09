@@ -1,0 +1,25 @@
+lass Solution {
+public:
+    queue<int> modifyQueue(queue<int> q, int k) {
+        if (k > q.size()) return q;   // constraint: k > size -> return original
+
+        stack<int> st;
+        // 1) push first k elements into stack
+        for (int i = 0; i < k; i++) {
+            st.push(q.front());
+            q.pop();
+        }
+        // 2) pop stack back into queue (reversed)
+        while (!st.empty()) {
+            q.push(st.top());
+            st.pop();
+        }
+        // 3) rotate remaining (size - k) elements to the back
+        int remaining = q.size() - k;
+        while (remaining--) {
+            q.push(q.front());
+            q.pop();
+        }
+        return q;
+    }
+};
