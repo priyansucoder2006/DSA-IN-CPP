@@ -1,0 +1,35 @@
+class Solution {
+public:
+    vector<int> minOfMax(vector<int>& arr) {
+        // Your code here
+        stack<int>st;
+        stack<int>st2;
+        int n=arr.size();
+        vector<int>ans(n,INT_MAX);
+        vector<int>NGR(n,n);
+        vector<int>NGL(n,-1);
+        for(int i=0;i<n;i++){
+            while(!st.empty()&&arr[i]>arr[st.top()]){
+                NGR[st.top()]=i;
+                st.pop();
+            }
+            st.push(i);
+        }
+        for(int i=n-1;i>=0;i--){
+            while(!st2.empty()&&arr[i]>arr[st2.top()]){
+                NGL[st2.top()]=i;
+                st2.pop();
+            }
+            st2.push(i);
+        }
+        for(int i=0;i<n;i++){
+            int element=NGR[i]-NGL[i]-1;
+            ans[element-1]=min(arr[i],ans[element-1]);
+
+        }
+        for(int i=n-2;i>=0;i--){
+            ans[i]=min(ans[i],ans[i+1]);
+        }
+        return ans;
+    }
+};
